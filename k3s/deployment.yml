@@ -37,7 +37,12 @@ spec:
           volumeMounts:
             - name: mariadb-persistent-storage
               mountPath: /var/lib/mariadb
+            - name: mysql-initdb
+              mountPath: /docker-entrypoint-initdb.d
       volumes:
         - name: mariadb-persistent-storage
           persistentVolumeClaim:
             claimName: mariadb-pv-claim
+        - name: mysql-initdb
+          configMap:
+            name: mysql-initdb-config

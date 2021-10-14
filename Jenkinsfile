@@ -11,6 +11,13 @@ node("kube2"){
 
     tempString = sh(returnStatus: true, script: 'kubectl get deployments | grep -c pi-mariadb')
     if(tempString.trim().equals("1")){
+         tempString = sh(returnStatus: true, script: 'kubectl get configmap | grep -c mysql-initdb-config')
+         if(!tempString.trim().equals("1")){
+             println("Removing mysql-initdb-config configmap");
+             sh "kubectl delete configmap mysql-initdb-config"
+             println("Adding mysql-initdb-config configmap");
+             sh "kubectl create -f k3s/configmap.yml"
+         }
         tempString = sh(returnStatus: true, script: 'kubectl get pvc | grep -c mariadb-pv-claim')
         if(!tempString.trim().equals("1")){
             println("Removing mariadb-pv-claim pvc");
