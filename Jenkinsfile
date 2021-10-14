@@ -15,23 +15,25 @@ node("kube2"){
          if(!tempString.trim().equals("1")){
              println("Removing mysql-initdb-config configmap");
              sh "kubectl delete configmap mysql-initdb-config"
-             println("Adding mysql-initdb-config configmap");
-             sh "kubectl create -f k3s/configmap.yml"
          }
+         println("Adding mysql-initdb-config configmap");
+         sh "kubectl create -f k3s/configmap.yml"
+         
         tempString = sh(returnStatus: true, script: 'kubectl get pvc | grep -c mariadb-pv-claim')
         if(!tempString.trim().equals("1")){
             println("Removing mariadb-pv-claim pvc");
             sh "kubectl delete pvc mariadb-pv-claim"
-            println("Adding mariadb-pv-claim pvc");
-            sh "kubectl create -f k3s/pvc.yml"
         }
+        println("Adding mariadb-pv-claim pvc");
+        sh "kubectl create -f k3s/pvc.yml"
         tempString = sh(returnStatus: true, script: 'kubectl get svc | grep -c pi-mariadb')
         if(!tempString.trim().equals("1")){
             println("Removing pi-mariadb svc");
             sh "kubectl delete svc pi-mariadb"
-            println("Removing pi-mariadb svc");
-            sh "kubectl create -f k3s/service.yml"
         }
+        println("Removing pi-mariadb svc");
+        sh "kubectl create -f k3s/service.yml"
+
         println("Adding pi-mariadb deployment");
         sh "kubectl create -f k3s/deployment.yml"
     }
