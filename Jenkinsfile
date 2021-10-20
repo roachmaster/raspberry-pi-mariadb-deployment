@@ -18,7 +18,7 @@ node("kube2"){
          }
          println("Adding mysql-initdb-config configmap");
          sh "kubectl create -f k3s/configmap.yml"
-         
+
         tempString = sh(returnStatus: true, script: 'kubectl get pvc | grep -c mariadb-pv-claim')
         if(!tempString.trim().equals("1")){
             println("Removing mariadb-pv-claim pvc");
