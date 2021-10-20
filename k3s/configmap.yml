@@ -5,4 +5,4 @@ metadata:
 data:
   initdb.sql: |
     CREATE DATABASE springbootdb;
-    CREATE DATABASE springbootdb-test;
+    CREATE DATABASE springbootdb_test;
