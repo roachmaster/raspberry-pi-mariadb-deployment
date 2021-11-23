@@ -6,3 +6,5 @@ data:
   initdb.sql: |
     CREATE DATABASE springbootdb;
     CREATE DATABASE springbootdb_test;
+    CREATE DATABASE badrequestdb;
+    CREATE DATABASE badrequestdb_test;
