@@ -1,4 +1,4 @@
-node("kube2"){
+node(){
     git 'git@github.com:roachmaster/raspberry-pi-mariadb-deployment.git'
 
     stage("Create Secret"){
